@@ -1,0 +1,13 @@
+services:
+  claude:
+    build: .
+    image: claude-code:local
+    user: claude
+    env_file:
+      - .env
+    volumes:
+      - ./projects:/workspace
+      - ./config:/home/claude/.claude
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
