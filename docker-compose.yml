@@ -2,12 +2,14 @@ services:
   claude:
     build: .
     image: claude-code:local
-    user: claude
+    # root на старте — entrypoint.sh чинит права на docker.sock и дропает до claude
+    user: root
     env_file:
       - .env
     volumes:
       - ./projects:/workspace
       - ./config:/home/claude/.claude
+      - /var/run/docker.sock:/var/run/docker.sock
     stdin_open: true
     tty: true
     command: tail -f /dev/null
