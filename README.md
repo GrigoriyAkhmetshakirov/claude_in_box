@@ -13,11 +13,11 @@
 │  │                               │  │
 │  │  Claude Code                  │  │
 │  │  • bypassPermissions          │  │
-│  │  • root-доступ                │  │
+│  │  • пользователь claude       │  │
 │  │  • никаких подтверждений      │  │
 │  │                               │  │
 │  │  /workspace ← ./projects      │  │
-│  │  /root/.claude ← ./config     │  │
+│  │  /home/claude/.claude ← ./config│  │
 │  └───────────────────────────────┘  │
 │                                     │
 │  НЕТ доступа к:                     │
@@ -33,23 +33,39 @@
 claude_in_box/
 ├── Dockerfile              # node:22-slim + git + python + Claude Code CLI
 ├── docker-compose.yml      # bridge-сеть, только локальные монтирования
-├── .env                    # API-ключи (не коммитить)
-├── .gitignore              # Исключает .env
+├── .env.example            # Шаблон для .env
+├── .env                    # API-ключи (не коммитить, создать из .env.example)
+├── .gitignore              # Исключает .env, config/, projects/
 ├── claude-docker           # Обёртка для общения с контейнером с хоста
-├── config/
-│   ├── settings.json       # bypassPermissions, язык, плагины
-│   └── settings.local.json # Дополнительные разрешения (WebSearch и т.д.)
-└── projects/               # Сюда клади проекты (смонтирована в /workspace)
+├── USAGE.md                # Инструкция по использованию Claude Code
+├── config.example/         # Шаблон конфигов (скопировать в config/)
+│   ├── settings.json       # bypassPermissions, язык
+│   └── settings.local.json # Разрешения команд и WebSearch
+├── config/                 # Рабочие конфиги (не коммитить)
+│   ├── settings.json
+│   └── settings.local.json
+└── projects/               # Сюда клади проекты (не коммитить, смонтирована в /workspace)
 ```
 
 ## Быстрый старт
 
-### 1. Настройка .env
+### 1. Клонирование и настройка
 
 ```bash
-cp .env.example .env   # если есть .env.example
-# или отредактируй .env:
+git clone https://github.com/GrigoriyAkhmetshakirov/claude_in_box.git
+cd claude_in_box
+
+# Создать .env из шаблона
+cp .env.example .env
+
+# Создать config/ из шаблона
+cp -r config.example config
+
+# Создать папку для проектов
+mkdir -p projects
 ```
+
+Отредактируй `.env` — вставь свой API-ключ:
 
 Файл `.env`:
 
@@ -189,7 +205,7 @@ docker compose restart
 ```yaml
 volumes:
   - ./projects:/workspace
-  - ./config:/root/.claude
+  - ./config:/home/claude/.claude
   - /var/run/docker.sock:/var/run/docker.sock    # ← добавить эту строку
 ```
 

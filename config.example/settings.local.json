@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(go *)",
+      "Bash(npm *)",
+      "Bash(python3 *)",
+      "Bash(pip *)",
+      "Bash(pip3 *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(rm *)",
+      "Bash(mv *)",
+      "Bash(cp *)",
+      "Bash(chmod *)",
+      "Bash(node *)",
+      "WebSearch",
+      "WebFetch"
+    ]
+  },
+  "outputStyle": "Explanatory"
+}

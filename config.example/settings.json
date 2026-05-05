@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "model": "claude-sonnet-4-6",
+  "language": "Russian",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto"
+}
