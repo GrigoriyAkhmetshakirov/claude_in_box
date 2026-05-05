@@ -13,11 +13,11 @@
 │  │                               │  │
 │  │  Claude Code                  │  │
 │  │  • bypassPermissions          │  │
-│  │  • пользователь claude       │  │
+│  │  • пользователь claude        │  │
 │  │  • никаких подтверждений      │  │
 │  │                               │  │
 │  │  /workspace ← ./projects      │  │
-│  │  /home/claude/.claude ← ./config│  │
+│  │  /home/claude/.claude←./config│  │
 │  └───────────────────────────────┘  │
 │                                     │
 │  НЕТ доступа к:                     │
@@ -34,17 +34,17 @@ claude_in_box/
 ├── Dockerfile              # node:22-slim + git + python + Claude Code CLI
 ├── docker-compose.yml      # bridge-сеть, только локальные монтирования
 ├── .env.example            # Шаблон для .env
-├── .env                    # API-ключи (не коммитить, создать из .env.example)
+├── .env                    # API-ключи
 ├── .gitignore              # Исключает .env, config/, projects/
 ├── claude-docker           # Обёртка для общения с контейнером с хоста
 ├── USAGE.md                # Инструкция по использованию Claude Code
 ├── config.example/         # Шаблон конфигов (скопировать в config/)
 │   ├── settings.json       # bypassPermissions, язык
 │   └── settings.local.json # Разрешения команд и WebSearch
-├── config/                 # Рабочие конфиги (не коммитить)
+├── config/                 # Рабочие конфиги
 │   ├── settings.json
 │   └── settings.local.json
-└── projects/               # Сюда клади проекты (не коммитить, смонтирована в /workspace)
+└── projects/               # Сюда клади проекты
 ```
 
 ## Быстрый старт
