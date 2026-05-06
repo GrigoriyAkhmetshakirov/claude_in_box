@@ -39,7 +39,8 @@ claude_in_box/
 ├── .env.example            # Шаблон для .env
 ├── .env                    # Твои API-ключи
 ├── .gitignore              # Исключает .env, config/, projects/
-├── claude-docker           # Скрипт для общения с контейнером
+├── claude-docker           # Скрипт запуска (Linux/macOS)
+├── claude-docker.bat       # Скрипт запуска (Windows)
 ├── USAGE.md                # Памятка по Claude Code
 ├── config.example/         # Шаблоны конфигов
 │   ├── settings.json       # bypassPermissions, язык
@@ -87,16 +88,24 @@ docker compose up -d
 
 ```bash
 ./claude-docker                      # новый интерактивный сеанс
-./claude-docker -p "что делает код?"  # один вопрос (неинтерактивно)
+./claude-docker "что делает код?"     # один вопрос (неинтерактивно)
+./claude-docker --resume             # продолжить последнюю сессию
+./claude-docker --continue           # продолжить с последнего места
 ```
 
 Или напрямую:
 
 ```bash
-docker compose exec -it claude claude
+docker compose exec -it -u claude claude claude
 ```
 
-Чтобы продолжить предыдущую сессию — запусти `./claude-docker` и нажми `Ctrl+R` для выбора из истории.
+### Windows
+
+```cmd
+claude-docker.bat                    # новый интерактивный сеанс
+claude-docker.bat --resume           # продолжить последнюю сессию
+claude-docker.bat "что делает код?"   # один вопрос
+```
 
 ## Добавляем проекты
 

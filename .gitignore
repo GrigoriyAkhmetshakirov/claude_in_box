@@ -1,3 +1,4 @@
 .env
-projects
-config
+projects/
+config/
+.claude/

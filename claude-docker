@@ -6,9 +6,15 @@ cd "$(dirname "$0")"
 # Поднять контейнер если не запущен
 docker compose up -d --wait 2>/dev/null || docker compose up -d
 
-# Если аргументов нет — интерактивный сеанс
-if [ $# -eq 0 ]; then
-    docker compose exec -it -u claude claude claude
-else
-    docker compose exec -T -u claude claude claude "$@"
-fi
+# --resume и --continue требуют TTY (интерактивный режим)
+case "${1:-}" in
+    --resume|--continue)
+        docker compose exec -it -u claude claude claude "$@"
+        ;;
+    "")
+        docker compose exec -it -u claude claude claude
+        ;;
+    *)
+        docker compose exec -T -u claude claude claude "$@"
+        ;;
+esac
