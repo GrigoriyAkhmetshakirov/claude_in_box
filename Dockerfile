@@ -26,7 +26,8 @@ RUN useradd -m -s /bin/bash claude \
     && chown -R claude:claude /home/claude
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
+    && chmod +x /usr/local/bin/entrypoint.sh
 
 WORKDIR /workspace
 
